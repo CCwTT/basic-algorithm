@@ -1,0 +1,64 @@
+后缀数组(Suffix Array,SA)
+后缀的编号是后缀在原串中的起始位置
+把8个后缀按照字典序升序排序
+如，aabaaaab的1号后缀是aabaaaab,3号后缀是baaaab 
+把8个后缀按照字典序升序排序，则排在第一的是4号后缀aaaab
+后缀数组 sa[i]表示排序为i的后缀编号
+sa[1]=4
+
+名词数组 rk[i]表示后缀i的排名
+rk[4]=1
+
+sa和rk互为逆运算
+rk[sa[i]]=sa[rk[i]]=i
+
+高度数组height[i]=lcp(sa[i],sa[i-1])
+第i名后缀和第i-1名后缀的最长公共前缀的程度
+height[2]=lcp(5,4)=3
+
+高度数组表示两个后缀的相似度，
+排序相邻的两个后缀相似度最高
+
+void get_sa()
+利用倍增法和桶排序，计算sa数组
+
+void get_height()
+利用sa[]和rk[] 计算height数组
+
+int n,m; //n为后缀个数，m为桶的个数
+int x[N],y[N],c[N],sa[N],rk[N],height[N];
+//桶数组x[i],辅助数组y[i],计数数组c[i]
+void get_sa(){
+    int i,j,k;
+    //按第一个字母排序
+    for(i=1;i<=n;i++) c[x[i]=s[i]]++;
+    for(i=1;i<=m;i++) c[i]+=c[i-1];
+    for(i=n;i;i--) sa[c[x[i]]--]=i;
+    for(k=1;k<=n;k<<=1){ //logn轮
+        //按第二关键字排序
+        memset(c,0,sizeof(c));
+        for(i=1;i<=n;i++) y[i]=sa[i];
+        for(i=1;i<=n;i++) c[x[y[i]+k]]++; //向右偏移1位获取第二关键字的桶号并累计
+        for(i=1;i<=m;i++) c[i]+=c[i-1];
+        for(i=n;i;i--) sa[c[x[y[i]+k]]--]=y[i];
+        //按第一关键字排序
+        memset(c,0,sizeof(c));
+        for(i=1;i<=n;i++) y[i]=sa[i];
+        for(i=1;i<=n;i++) c[x[y[i]]]++;
+        for(i=1;i<=m;i++) c[i]+=c[i-1];
+        for(i=n;i;i--) sa[c[x[y[i]]]--]=y[i];
+        //把后缀放入桶数组
+        for(i=1;i<=n;i++) y[i]=x[i];
+        //更新桶数组
+        m=0;
+        for(i=1;i<=n;i++){
+            if(y[sa[i]]==y[sa[i-1]]&&y[sa[i]+k]==y[sa[i-1]+k]){
+                x[sa[i]]=m;
+            }else{
+                x[sa[i]]=++m;
+            }
+        }
+        if(m==n) break; //如果已经排好序，则退出
+    }
+}
+

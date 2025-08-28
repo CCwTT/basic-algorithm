@@ -1,0 +1,14 @@
+{
+    "files.associations": {
+        "iostream": "cpp",
+        "vector": "cpp",
+        "*.tcc": "cpp",
+        "deque": "cpp",
+        "thread": "cpp",
+        "istream": "cpp",
+        "ostream": "cpp",
+        "list": "cpp",
+        "random": "cpp",
+        "chrono": "cpp"
+    }
+}

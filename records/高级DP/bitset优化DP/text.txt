@@ -1,0 +1,37 @@
+bitset基本用法:
+1、初始化
+bitset<8> bs1; //00000000
+bitset<8> bs2(13); //00001101
+bitset<8> bs3("1010"); //00001010
+
+2、访问与修改
+bitset<8> bs(13); //00001101
+
+bool bit0=bs[0]; //1
+bool bit3=bs[1]; //0
+
+bs[4]=1; //00011101(29)
+
+bs.set(); //11111111
+bs.reset(); //00000000
+bs.flip(); //11111111
+bs.flip(2); //11111011
+
+3、位运算
+bitset<4> a("1010"); //1010
+bitset<4> b("1100"); //1100
+
+bitset<4> c=a&b; //1000
+bitset<4> d=a|b; //1110
+bitset<4> e=a^b; //0110
+bitset<4> f=~a; //0101
+
+4、常用方法
+bitset<4> bs("1011");
+bs.count(); //3
+bs.size(); //4
+bs.any(); //true
+bs.none(); //false
+bs.all(); //false
+bs.to_ulong(); //11
+bs.to_string(); //"1011"

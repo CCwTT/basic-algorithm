@@ -1,0 +1,421 @@
+这道题要用扫描线线段树来做，我这里有4份有关扫描线或结合扫描线和线段树的例题，请根据示例代码给出上述问题答案。题目1：// 包含每个查询的最小区间
+// 给你一个二维整数数组intervals，其中intervals[i] = [l, r]
+// 表示第i个区间开始于l，结束于r，区间的长度是r-l+1
+// 给你一个整数数组queries，queries[i]表示要查询的位置
+// 答案是所有包含queries[i]的区间中，最小长度的区间是多长
+// 返回数组对应查询的所有答案，如果不存在这样的区间那么答案是-1  示例代码：class Solution{
+public:
+    vector<int> minInterval(vector<vector<int>>&intervals,vector<int>&queries){
+        int n=intervals.size();
+        int m=queries.size();
+        sort(intervals.begin(),intervals.end());
+        vector<pair<int,int>> Queries(m);
+        for(int i=0;i<m;i++){
+            Queries[i]={queries[i],i};
+        }
+        sort(Queries.begin(),Queries.end());
+        auto cmp=[](const pair<int,int>&u,const pair<int,int>&v)->bool{
+            return u.first>v.first;
+        };
+        priority_queue<pair<int,int>,vector<pair<int,int>>,decltype(cmp)> pq;
+        vector<int> ans(m);
+        for(int i=0,j=0;i<m;i++){
+            while(j<n&&intervals[j][0]<=Queries[i].first){
+                pq.push({intervals[j][1]-intervals[j][0]+1,intervals[j][1]});
+                j++;
+            }
+            while(!pq.empty()&&pq.top().second<Queries[i].first){
+                pq.pop();
+            }
+            if(!pq.empty()){
+                ans[Queries[i].second]=pq.top().first;
+            }else{
+                ans[Queries[i].second]=-1;
+            }
+        }
+        return ans;
+    }
+};    题目2：城市的 天际线 是从远处观看该城市中所有建筑物形成的轮廓的外部轮廓。给你所有建筑物的位置和高度，请返回 由这些建筑物形成的 天际线 。
+
+每个建筑物的几何信息由数组 buildings 表示，其中三元组 buildings[i] = [lefti, righti, heighti] 表示：
+
+lefti 是第 i 座建筑物左边缘的 x 坐标。
+righti 是第 i 座建筑物右边缘的 x 坐标。
+heighti 是第 i 座建筑物的高度。
+你可以假设所有的建筑都是完美的长方形，在高度为 0 的绝对平坦的表面上。
+
+天际线 应该表示为由 “关键点” 组成的列表，格式 [[x1,y1],[x2,y2],...] ，并按 x 坐标 进行 排序 。关键点是水平线段的左端点。列表中最后一个点是最右侧建筑物的终点，y 坐标始终为 0 ，仅用于标记天际线的终点。此外，任何两个相邻建筑物之间的地面都应被视为天际线轮廓的一部分。
+
+注意：输出天际线中不得有连续的相同高度的水平线。例如 [...[2 3], [4 5], [7 5], [11 5], [12 7]...] 是不正确的答案；三条高度为 5 的线应该在最终输出中合并为一个：[...[2 3], [4 5], [12 7], ...]   示例代码：class Discretizer{
+public:
+    vector<int> disc;
+    Discretizer() {}
+
+    void insert(int x){
+        disc.push_back(x);
+    }
+
+    int discretize(){
+        sort(disc.begin(),disc.end());
+        disc.erase(unique(disc.begin(),disc.end()),disc.end());
+        return disc.size();
+    }
+
+    int query(int x){
+        return lower_bound(disc.begin(),disc.end(),x)-disc.begin();
+    }
+};
+
+class Solution {
+public:
+    vector<vector<int>> getSkyline(vector<vector<int>>& buildings) {
+        int n = buildings.size();
+        Discretizer disc;
+        for(auto& building:buildings){
+            disc.insert(building[0]);
+            disc.insert(building[1]);
+            disc.insert(building[1]-1);
+        }
+        int m=disc.discretize();
+        for(auto& building:buildings){
+            building[0]=disc.query(building[0]);
+            building[1]=disc.query(building[1]-1);
+        }
+        priority_queue<pair<int,int>> pq;
+        vector<int> height(m);
+        for (int i=0,j=0;i<m;i++){
+            while(j<n&&buildings[j][0]<=i){
+                pq.push({buildings[j][2],buildings[j][1]});
+                j++;
+            }
+            while(!pq.empty()&&pq.top().second<i){
+                pq.pop();
+            }
+            if (!pq.empty()) {
+                height[i]=pq.top().first;
+            }
+        }
+        vector<vector<int>> ans;
+        for(int i=0,lastval=0;i<m;i++){
+            if(lastval!=height[i]){
+                ans.push_back({disc.disc[i],height[i]});
+            }
+            lastval=height[i];
+        }
+        return ans;
+    }
+};   问题3：求 n 个四边平行于坐标轴的矩形的面积并。
+
+输入格式
+第一行一个正整数 n。
+
+接下来 n 行每行四个非负整数 x 
+1
+​
+ ,y 
+1
+​
+ ,x 
+2
+​
+ ,y 
+2
+​
+ ，表示一个矩形的四个端点坐标为 (x 
+1
+​
+ ,y 
+1
+​
+ ),(x 
+1
+​
+ ,y 
+2
+​
+ ),(x 
+2
+​
+ ,y 
+2
+​
+ ),(x 
+2
+​
+ ,y 
+1
+​
+ )。
+
+输出格式
+一行一个正整数，表示 n 个矩形的并集覆盖的总面积。 示例代码：#include <bits/stdc++.h>
+using namespace std;
+typedef long long ll;
+
+struct Rec{
+    ll x1,y1,x2,y2;
+};
+
+struct Line{
+    ll x,y1,y2,v;
+    Line(ll x=0,ll y1=0,ll y2=0,ll v=0):x(x),y1(y1),y2(y2),v(v){}
+    bool operator<(const Line& o) const{
+        return x<o.x;
+    }
+};
+
+class Discretizer{
+public:
+    vector<ll> disc;
+    void insert(ll x){
+        disc.push_back(x);
+    }
+
+    ll discretize(){
+        sort(disc.begin(),disc.end());
+        disc.erase(unique(disc.begin(),disc.end()),disc.end());
+        return disc.size();
+    }
+
+    ll query(ll x){
+        return lower_bound(disc.begin(),disc.end(),x)-disc.begin()+1;
+    }
+};
+
+
+class SGT{
+public:
+    ll n;
+    vector<ll> length,cover,times;
+    Discretizer& disc;
+
+    SGT(ll sz,Discretizer& disc):n(sz-1),length(n<<2),cover(n<<3),times(n<<2),disc(disc){
+        build(1,1,n);
+    }
+
+    void build(ll p,ll l,ll r) {
+        length[p]=disc.disc[r]-(l==0?0:disc.disc[l-1]);
+        if(l==r){
+            return;
+        }
+        ll m=(l+r)>>1;
+        build(p<<1,l,m);
+        build(p<<1|1,m+1,r);
+    }
+
+    void up(ll p) {
+        if(times[p]>0) {
+            cover[p]=length[p];
+        } else {
+            cover[p]=cover[p<<1]+cover[p<<1|1];
+        }
+    }
+
+    void update(ll p,ll l,ll r,ll x,ll y,ll v){
+        if(x<=l&&r<=y) {
+            times[p]+=v;
+            if(times[p]>0){
+                cover[p]=length[p];
+            }else{
+                cover[p]=cover[p<<1]+cover[p<<1|1];
+            }
+            return;
+        }
+        ll m=(l+r)>>1;
+        if(x<=m) update(p<<1,l,m,x,y,v);
+        if(y>m) update(p<<1|1,m+1,r,x,y,v);    
+        up(p);
+    }
+};
+
+void solve(){
+    ll n;
+    cin>>n;
+    vector<Rec> rec(n+1);
+    for(ll i=1;i<=n;++i) {
+        cin>>rec[i].x1>>rec[i].y1>>rec[i].x2>>rec[i].y2;
+    }
+    vector<Line> line(2*n+1);
+    Discretizer disc;
+    for(ll i=1;i<=n;i++) {
+        auto [x1,y1,x2,y2]=rec[i];
+        disc.insert(y1);
+        disc.insert(y2);
+        line[i]=Line(x1,y1,y2,1);
+        line[i+n]=Line(x2,y1,y2,-1);
+    }
+    ll m=disc.discretize();
+    SGT sgt(m+1,disc);
+    sort(line.begin()+1,line.end());
+    ll ans=0;
+    ll lastx=0;
+    for(ll i=1;i<=2*n;++i) {
+        if(lastx<line[i].x) {
+            ans+=(ll)sgt.cover[1]*(line[i].x-lastx);
+        }
+        lastx=line[i].x;
+        ll l=disc.query(line[i].y1);
+        ll r=disc.query(line[i].y2)-1;
+        sgt.update(1,1,sgt.n,l,r,line[i].v);
+    }
+    cout<<ans<<endl;
+}
+
+signed main() {
+    ios::sync_with_stdio(false);
+    cin.tie(0);cout.tie(0);
+    ll T=1;
+    while(T--){
+        solve();
+    }    
+    return 0;
+}  题目4：墙上贴着许多形状相同的海报、照片。它们的边都是水平和垂直的。每个矩形图片可能部分或全部的覆盖了其他图片。所有矩形合并后的边长称为周长。输入格式
+输入文件的第一行是一个整数 N，表示有多少个矩形。接下来 N 行给出了每一个矩形左下角坐标和右上角坐标。
+
+输出格式
+输出文件只有一个正整数，表示所有矩形的周长。示例代码：#include <bits/stdc++.h>
+using namespace std;
+typedef long long ll;
+
+struct Rec{
+    ll x1,y1,x2,y2;
+};
+
+struct Line{
+    ll x,y1,y2,v;
+    Line(ll x=0,ll y1=0,ll y2=0,ll v=0):x(x),y1(y1),y2(y2),v(v){}
+    bool operator<(const Line& o) const{
+        //If there are multiple lines at the same x,the lines with v 1 should be processed first
+        //otherwise,the projection length will change frequently,resulting in incorrect results.
+        return x^o.x?x<o.x:v>o.v;
+    }
+};
+
+class Discretizer{
+public:
+    vector<ll> disc={LLONG_MIN};
+    Discretizer(){}
+    void insert(ll x){
+        disc.push_back(x);
+    }
+
+    ll discretize(){
+        sort(disc.begin(),disc.end());
+        disc.erase(unique(disc.begin(),disc.end()),disc.end());
+        return disc.size()-1;
+    }
+
+    ll query(ll x){
+        return lower_bound(disc.begin(),disc.end(),x)-disc.begin();
+    }
+
+    void clear(){
+        disc.clear();
+        disc.push_back(LLONG_MIN);
+    }
+};
+
+class SGT{
+public:
+    ll n;
+    Discretizer& disc;
+    vector<ll> length,cover,times;
+    SGT(ll sz,Discretizer& disc):n(sz-1),length(n<<2),cover(n<<3),times(n<<2),disc(disc){
+        build(1,1,n);
+    }
+    void build(ll p,ll l,ll r){
+        length[p]=disc.disc[r+1]-disc.disc[l];
+        if(l==r){
+            return;
+        }
+        ll m=(l+r)>>1;
+        build(p<<1,l,m);
+        build(p<<1|1,m+1,r);
+    }
+    
+    void up(ll p){
+        if(times[p]>0){
+            cover[p]=length[p];
+        }else{
+            cover[p]=cover[p<<1]+cover[(p<<1)|1];
+        }
+    }
+    
+    void update(ll p,ll l,ll r,ll x,ll y,ll v){
+        if(x<=l&&r<=y){
+            times[p]+=v;
+            if(times[p]>0){
+                cover[p]=length[p];
+            }else{
+                cover[p]=cover[p<<1]+cover[(p<<1)|1];
+            }
+            return;
+        }
+        ll m=l+r>>1;
+        if(x<=m) update(p<<1,l,m,x,y,v);
+        if(y>m) update(p<<1|1,m+1,r,x,y,v);
+        up(p);
+    }
+};
+
+ll scan(vector<Line>& line,Discretizer& disc){
+    ll m=disc.discretize();
+    SGT sgt(m+1,disc);
+    sort(line.begin(),line.end());
+    ll ans=0;
+    for(ll i=0;i<line.size();i++){
+        ll lastval=sgt.cover[1];
+        ll l=disc.query(line[i].y1);
+        ll r=disc.query(line[i].y2)-1;
+        sgt.update(1,1,sgt.n,l,r,line[i].v);
+        ans+=abs(sgt.cover[1]-lastval);
+    }
+    return ans;
+}
+
+ll scanY(ll n,vector<Rec>& rec){
+    vector<Line> line;
+    Discretizer disc;
+    for(ll i=1;i<=n;i++){
+        ll x1=rec[i].x1,y1=rec[i].y1,x2=rec[i].x2,y2=rec[i].y2;
+        disc.insert(y1);
+        disc.insert(y2);
+        line.emplace_back(x1,y1,y2,1);
+        line.emplace_back(x2,y1,y2,-1);
+    }
+    return scan(line,disc);
+}
+
+ll scanX(ll n,vector<Rec>& rec){
+    vector<Line> line;
+    Discretizer disc;
+    disc.clear();
+    for(ll i=1;i<=n;i++){
+        ll x1=rec[i].x1,y1=rec[i].y1,x2=rec[i].x2,y2=rec[i].y2;
+        disc.insert(x1);
+        disc.insert(x2);
+        line.emplace_back(y1,x1,x2,1);
+        line.emplace_back(y2,x1,x2,-1);
+    }
+    return scan(line,disc);
+}
+
+void solve(){
+    ll n;
+    cin>>n;
+    vector<Rec> rec(n+1);
+    for(ll i=1;i<=n;i++){
+        cin>>rec[i].x1>>rec[i].y1>>rec[i].x2>>rec[i].y2;
+    }
+    cout<<scanY(n,rec)+scanX(n,rec)<<endl;
+}
+
+signed main(){
+    ios::sync_with_stdio(false);
+    cin.tie(0);cout.tie(0);
+    ll T=1;
+    while(T--){
+        solve();
+    }
+    return 0;
+}  注意题目3和4给出了完整代码，而题目1和2只给出了核心类的代码，你应该给出上述问题的完整代码。

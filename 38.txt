@@ -1,0 +1,187 @@
+代码空格处理要求：
+核心要求：去除代码中多余空格。
+代码中不许出现：空格+空格 空格-空格 空格*空格 空格/空格 空格%空格 空格=空格 空格==空格 空格<空格 空格>空格 空格<=空格 空格>=空格 空格!=空格 空格&&空格 空格||空格 空格&空格 空格|空格 空格^空格
+代码中不许出现：)空格{
+示例：
+1、未去除多余空格：ans += digits.size() * f1(digits, num, offset / 10, len - 1, 1, 1);
+已去除多余空格：ans+=digits.size()*f1(digits,num,offset/10,len-1,1,1);
+2、未去除多余空格：} else {
+已去除多余空格：}else{
+3、未去除多余空格：int tmp = num / 10;
+已去除多余空格：int tmp=num/10;
+4、未去除多余空格：int len = 1;
+已去除多余空格：int len=1;
+5、未去除多余空格：if (free == 0) {
+已去除多余空格：if(free==0){
+6、未去除多余空格：int f1(vector<int>& digits, int num, int offset, int len, int free, int fix) {
+已去除多余空格：int f1(vector<int>& digits,int num,int offset,int len,int free,int fix){
+7、未去除多余空格：class Solution {
+已去除多余空格：class Solution{
+8、未去除多余空格：static int atMostNGivenDigitSet1(vector<string>& strs, int num) {
+已去除多余空格：static int atMostNGivenDigitSet1(vector<string>& strs,int num){
+9、未去除多余空格：ans +=cnt[len - 1];
+已去除多余空格：ans+=cnt[len-1];
+10、未去除多余空格：if(i<=pre - 2 || i>=pre + 2)
+       已去除多余空格：if(i<=pre-2||i>=pre+2)
+11、未去除多余空格：return cnt(b)-cnt(a - 1);
+       已去除多余空格：return cnt(b)-cnt(a-1);
+12、未去除多余空格：color[i]=color[i << 1] | color[i << 1 | 1];
+       已去除多余空格：color[i]=color[i<<1]|color[i<<1|1];
+13、未去除多余空格：for(int i = 0; i < m; i++){
+       已去除多余空格：for(int i=0;i<m;i++){
+14、未去除多余空格： pair<int, int> tuple<ll, ll, ll>
+       已去除多余空格：pair<int,int> tuple<ll,ll,ll>
+15、未去除多余空格： for (int i = 0; i < m; ++i) {
+       已去除多余空格：for(int i=0;i<m;++i){
+16、未去除多余空格： if (row < m && col < n) {
+       已去除多余空格：if(row<m&&col<n){
+17、未去除多余空格： sum+=A[row*k + l]*B[l*n + col];
+       已去除多余空格：sum+=A[row*k+l]*B[l*n+col];
+18、未去除多余空格： size_t size_A = m*k*sizeof(ll);
+       已去除多余空格：size_t size_A=m*k*sizeof(ll);
+19、未去除多余空格： cout << "输入矩阵A的列数和矩阵B的行数k (k > 0): ";
+       已去除多余空格：cout<<"输入矩阵A的列数和矩阵B的行数k (k > 0): ";
+20、未去除多余空格： double speedup = serial_time/hip_time;
+       已去除多余空格：double speedup=serial_time/hip_time;
+21、未去除多余空格： struct Tri {
+       已去除多余空格：struct Tri{
+22、未去除多余空格：  pair<ll,ll> ver_proj() {
+       已去除多余空格： pair<ll,ll> ver_proj(){
+23、未去除多余空格： return {x,x + len};
+       已去除多余空格：return {x,x+len};
+24、未去除多余空格： auto not_intersect = [](pair<ll,ll> u,pair<ll,ll> v) {
+       已去除多余空格：auto not_intersect=[](pair<ll,ll> u,pair<ll,ll> v){
+25、未去除多余空格： if (y == x) add_edge(i, n + 2);
+       已去除多余空格： if(y==x) add_edge(i,n+2);
+26、未去除多余空格： if ((disa[i] == LLONG_MAX) || (disb[i] == LLONG_MAX) || (disc[i] == LLONG_MAX)) continue;
+       已去除多余空格：if((disa[i]==LLONG_MAX)||(disb[i]==LLONG_MAX)||(disc[i]==LLONG_MAX)) continue;       
+27、未去除多余空格： for(ll i = 1;i <= n;++i) {
+       已去除多余空格：for(ll i=1;i<=n;++i){  
+28、未去除多余空格： a[i] = {x,y,len,w};
+       已去除多余空格：a[i]={x,y,len,w}; 
+29、未去除多余空格：  vector<ll> disa = dijkstra(g,n + 1);
+       已去除多余空格： vector<ll> disa=dijkstra(g,n+1);
+30、未去除多余空格： if(x + len == W) add_edge(i,n+1);
+       已去除多余空格：if(x+len==W) add_edge(i,n+1); 
+31、未去除多余空格： ll mid=(l + r)>>1;
+       已去除多余空格：ll mid=(l+r)>>1;
+32、未去除多余空格： if(x + len == W) add_edge(i,n+1);
+       已去除多余空格：if(x+len==W) add_edge(i,n+1); 
+33、未去除多余空格： lazy(p,r - l + 1,v,v,v,v);
+       已去除多余空格：lazy(p,r-l+1,v,v,v,v);
+34、未去除多余空格： lazy(p,r - l + 1,v - max_val[p],0,v - max_val[p],0);
+       已去除多余空格：lazy(p,r-l+1,v-max_val[p],0,v-max_val[p],0);
+35、未去除多余空格： build(p<<1|1,mid + 1,r);
+       已去除多余空格：build(p<<1|1,mid+1,r);
+36、未去除多余空格：  down(p,mid - l + 1,r - mid);
+       已去除多余空格： down(p,mid-l+1,r-mid);
+37、未去除多余空格： if(y>mid) add(p<<1|1,mid + 1,r,x,y,v);
+       已去除多余空格： if(y>mid) add(p<<1|1,mid+1,r,x,y,v);
+38、未去除多余空格： for(ll i = 1; i <= n; i++){
+       已去除多余空格：for(ll i=1;i<=n;i++){
+39、未去除多余空格： for(ll i = 1,op,l,r; i <= m; i++){
+       已去除多余空格：for(ll i=1,op,l,r;i<=m;i++){
+40、未去除多余空格： if(op == 1){
+       已去除多余空格：if(op==1){
+41、未去除多余空格： ll res = LLONG_MIN;
+       已去除多余空格：ll res=LLONG_MIN;
+代码案例：
+1、不符合格式要求代码：
+#include <iostream>
+#include <vector>
+#define sz(v) ((int)(v).size())
+#define pb push_back
+#define MULTI int _T; cin >> _T; while(_T--)
+using namespace std;
+typedef long long ll;
+template <typename T> bool chkmin(T &x, T y) {return y < x ? x = y, 1 : 0;}
+template <typename T> bool chkmax(T &x, T y) {return y > x ? x = y, 1 : 0;}
+int n;
+vector<int> manacher(vector<int> s0) {
+       vector<int> s = {-1};
+       for (int val: s0) {
+              s.pb(val);
+              s.pb(-1);
+       }
+       int n = sz(s);
+       vector<int> d(n);
+       for (int i = 0, l = 0, r = -1;i <= n - 1;++i) {
+              int k = (i > r) ? 1 : min(d[l + r - i], r - i + 1);
+              while ((0 <= i - k) && (i + k <= n - 1) && (s[i - k] + s[i + k] == s[i - k + 2] + s[i + k - 2])) {
+                     k++;
+              }
+              d[i] = k--;
+              if (i + k > r) {
+                     l = i - k;
+                     r = i + k;
+              }
+       }
+       return d;
+}
+int main() {
+       ios::sync_with_stdio(false);
+       cin.tie(0);
+       MULTI {
+              cin >> n;
+              vector<int> a(n);
+              for (int i = 0;i <= n - 1;++i) {
+                     cin >> a[i];
+              }
+              vector<int> d = manacher(a);
+              ll ans = 0;
+              for (int r: d) {
+                     ans += r / 2;
+              }
+              cout << ans << "\n";
+       }
+}
+符合格式要求代码：
+#include<iostream>
+#include<vector>
+#define sz(v) ((int)(v).size())
+#define pb push_back
+#define MULTI int _T;cin>>_T;while(_T--)
+using namespace std;
+typedef long long ll;
+template<typename T> bool chkmin(T&x,T y){return y<x?x=y,1:0;}
+template<typename T> bool chkmax(T&x,T y){return y>x?x=y,1:0;}
+int n;
+vector<int> manacher(vector<int> s0){
+vector<int> s={-1};
+for(int val:s0){
+       s.pb(val);
+       s.pb(-1);
+}
+int n=sz(s);
+vector<int> d(n);
+for(int i=0,l=0,r=-1;i<=n-1;++i){
+       int k=(i>r)?1:min(d[l+r-i],r-i+1);
+       while((0<=i-k)&&(i+k<=n-1)&&(s[i-k]+s[i+k]==s[i-k+2]+s[i+k-2])){
+       k++;
+       }
+       d[i]=k--;
+       if(i+k>r){
+       l=i-k;
+       r=i+k;
+       }
+}
+return d;
+}
+int main(){
+ios::sync_with_stdio(false);
+cin.tie(0);
+MULTI{
+       cin>>n;
+       vector<int> a(n);
+       for(int i=0;i<=n-1;++i){
+       cin>>a[i];
+       }
+       vector<int> d=manacher(a);
+       ll ans=0;
+       for(int r:d){
+       ans+=r/2;
+       }
+       cout<<ans<<"\n";
+}
+}
+你注意代码缩进了吗

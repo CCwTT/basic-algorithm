@@ -1,0 +1,1 @@
+{"name":"Local: P_1631_SequenceCoalescing","url":"d:\\Code\\records\\2022_CCPC_Weihai\\P_1631_SequenceCoalescing.cpp","tests":[{"id":1752060870122,"input":"3\n2 6 6 \n1 4 8 ","output":"3 6 7"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"d:\\Code\\records\\2022_CCPC_Weihai\\P_1631_SequenceCoalescing.cpp","group":"local","local":true}

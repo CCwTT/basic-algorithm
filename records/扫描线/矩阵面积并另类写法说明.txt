@@ -1,0 +1,17 @@
+void build(ll p,ll l,ll r){
+    //cout<<"p:"<<p<<" l:"<<l<<" r:"<<r<<endl;
+    length[p]=disc.disc[r]-disc.disc[l];
+    if(r-l==1){
+        return;
+    }
+    ll m=(l+r)>>1;
+    build(p<<1,l,m);
+    build(p<<1|1,m+1,r);
+}
+这种在r-l==1替代l==r的写法是错误的，具体运行信息如下，看了就知道了：
+2
+100 100 200 200
+150 150 250 255
+p:1 l:1 r:4
+p:2 l:1 r:2
+p:3 l:3 r:4

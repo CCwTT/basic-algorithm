@@ -1,0 +1,2 @@
+1.多测+push_back()/emplace_back()一定要记得clear，比如图的邻接表
+2.查:多测初始化

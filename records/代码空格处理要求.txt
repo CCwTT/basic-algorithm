@@ -1,0 +1,40 @@
+核心要求：去除代码中多余空格。
+示例：
+1、未去除多余空格：ans += digits.size() * f1(digits, num, offset / 10, len - 1, 1, 1);
+     已去除多余空格：ans+=digits.size()*f1(digits,num,offset/10,len-1,1,1);
+
+2、未去除多余空格：} else {
+     已去除多余空格：}else{
+
+3、未去除多余空格：int tmp = num / 10;
+     已去除多余空格：int tmp=num/10;
+
+4、未去除多余空格：int len = 1;
+     已去除多余空格：int len=1;
+
+5、未去除多余空格：if (free == 0) {
+     已去除多余空格：if(free==0){
+
+6、未去除多余空格：int f1(vector<int>& digits, int num, int offset, int len, int free, int fix) {
+     已去除多余空格：int f1(vector<int>& digits,int num,int offset,int len,int free,int fix){
+
+7、未去除多余空格：class Solution {
+     已去除多余空格：class Solution{
+
+8、未去除多余空格：static int atMostNGivenDigitSet1(vector<string>& strs, int num) {
+     已去除多余空格：static int atMostNGivenDigitSet1(vector<string>& strs,int num){
+
+9、未去除多余空格：ans +=cnt[len - 1];
+     已去除多余空格：ans+=cnt[len-1];
+
+10、未去除多余空格：if(i<=pre - 2 || i>=pre + 2)
+       已去除多余空格：if(i<=pre-2||i>=pre+2)
+
+11、未去除多余空格：return cnt(b)-cnt(a - 1);
+       已去除多余空格：return cnt(b)-cnt(a-1);
+
+
+
+
+
+

@@ -1,0 +1,1 @@
+特征方程求递推公式:/ABC/ABC407/DominoCoveringXOR.cpp

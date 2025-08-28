@@ -1,0 +1,49 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "cppbuild",
+			"label": "C/C++: g++.exe build active file",
+			"command": "D:\\mingw64\\x86_64-13.2.0-release-win32-seh-ucrt-rt_v11-rev0\\mingw64\\bin\\g++.exe",
+			"args": [
+				"-fdiagnostics-color=always",
+				"-g",
+				"${file}",
+				//"${workspaceFolder}\\*.cpp",
+				"-o",
+				"${fileDirname}/${fileBasenameNoExtension}.exe"
+				//"${workspaceFolder}/myProgramcpp.exe"
+			],
+			"options": {
+				"cwd": "${fileDirname}"
+			},
+			"problemMatcher": [
+				"$gcc"
+			],
+			"group": "build",
+			"detail": "compiler: D:\\mingw64\\x86_64-13.2.0-release-win32-seh-ucrt-rt_v11-rev0\\mingw64\\bin\\g++.exe"
+		},
+		{
+			"type": "cppbuild",
+			"label": "C/C++: gcc.exe build active file",
+			"command": "D:/mingw64/x86_64-13.2.0-release-win32-seh-ucrt-rt_v11-rev0/mingw64/bin/gcc.exe",
+			"args": [
+				"-fdiagnostics-color=always",
+				"-g",
+				"${file}",
+				//"${workspaceFolder}\\*.cpp",
+				"-o",
+				"${fileDirname}/${fileBasenameNoExtension}.exe"
+				//"${workspaceFolder}/myProgramcpp.exe"
+			],
+			"options": {
+				"cwd": "D:/mingw64/x86_64-13.2.0-release-win32-seh-ucrt-rt_v11-rev0/mingw64/bin"
+			},
+			"problemMatcher": [
+				"$gcc"
+			],
+			"group": "build",
+			"detail": "compiler: D:/mingw64/x86_64-13.2.0-release-win32-seh-ucrt-rt_v11-rev0/mingw64/bin/gcc.exe"
+		}
+	]
+}
